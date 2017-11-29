@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--wheel colors-->
+    <color name="excellent">#54fe9f</color>
+    <color name="veryGood">#55feca</color>
+    <color name="good">#56fdfe</color>
+    <color name="quiteGood">#57c2fe</color>
+    <color name="notGood">#fee15a</color>
+    <color name="bad">#febd59</color>
+    <color name="terrible">#fe7957</color>
+
+    <array name="wheel">
+        <item>@color/excellent</item>
+        <item>@color/veryGood</item>
+        <item>@color/good</item>
+        <item>@color/quiteGood</item>
+        <item>@color/notGood</item>
+        <item>@color/bad</item>
+        <item>@color/terrible</item>
+    </array>
+</resources>

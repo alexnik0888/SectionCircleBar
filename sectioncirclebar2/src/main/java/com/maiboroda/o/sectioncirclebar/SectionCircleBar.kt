@@ -44,14 +44,7 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
     private var sectionDegree = 360f / sectionCount
     private val sectionScaleDegree = sectionDegree * sectionScale
     private var sectionColors = intArrayOf(sectionColor)
-//    private var barColorsDiff = intArrayOf(ContextCompat.getColor(context, R.color.excellent),
-//        ContextCompat.getColor(context, R.color.veryGood),
-//        ContextCompat.getColor(context, R.color.good),
-//        ContextCompat.getColor(context, R.color.quiteGood),
-//        ContextCompat.getColor(context, R.color.notGood),
-//        ContextCompat.getColor(context, R.color.bad),
-//        ContextCompat.getColor(context, R.color.terrible))
-//    private var sectionColors = intArrayOf(Color.GREEN, Color.YELLOW, Color.RED)
+    private var sectionColorsDiff: List<Int>? = null
 
     //text
     private val textPaint = Paint()
@@ -80,6 +73,12 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
         textList = list
     }
 
+    fun setSectionColors(list: List<Int>) {
+        if (sectionCount != list.size)
+            throw RuntimeException("List size must be equal to sections count")
+        sectionColorsDiff = list
+    }
+
     fun setListener(listener: (Int) -> Unit) {
         this.onSectionClick = listener
     }
@@ -105,6 +104,11 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
         val array = a.getTextArray(R.styleable.SectionCircleBar_textList)
         if (array != null)
             setTextList(array.map { it.toString() })
+
+        if (a.hasValue(R.styleable.SectionCircleBar_sectionColors)) {
+            val ta = resources.getIntArray(a.getResourceId(R.styleable.SectionCircleBar_sectionColors, 0))
+            setSectionColors(ta.toList())
+        }
 
         a.recycle()
     }
@@ -175,9 +179,11 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
     }
 
     private fun drawSection(canvas: Canvas, angle: Double) {
-//        var blocks: Int = Math.ceil(angle / sectionDegree).toInt()
-//        if (blocks <= 0) blocks = 1
-//        sectionPaint.color = barColorsDiff[blocks - 1]
+        if (sectionColorsDiff != null) {
+            var blocks: Int = Math.ceil(angle / sectionDegree).toInt()
+            if (blocks <= 0) blocks = 1
+            sectionPaint.color = sectionColorsDiff!![blocks - 1]
+        }
         drawBlocks(canvas, rimBounds, startAngle, angle, false, sectionPaint)
     }
 
