@@ -21,7 +21,7 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
     private var center: PointF? = null
     private var layoutHeight = 0
     private var layoutWidth = 0
-    private var listener: OnSectionClickListener? = null
+    private var onSectionClick: ((Int) -> Unit)? = null
 
     private var touchEventCount: Int = 0
 
@@ -80,8 +80,8 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
         textList = list
     }
 
-    fun setListener(listener: OnSectionClickListener) {
-        this.listener = listener
+    fun setListener(listener: (Int) -> Unit) {
+        this.onSectionClick = listener
     }
 
     private fun parseAttrs(a: TypedArray) {
@@ -272,7 +272,7 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
         if (textList != null)
             textList?.let { text = it[num.toInt() - 1] }
 
-        listener?.onSectionClick(num.toInt(), this)
+        onSectionClick?.invoke(num.toInt())
 
         invalidate()
     }
@@ -340,8 +340,4 @@ class SectionCircleBar(context: Context?, attrs: AttributeSet?) : View(context, 
     }
 
     private fun normalizeAngle(angle: Double): Double = (angle % totalDegrees + totalDegrees) % totalDegrees
-
-    interface OnSectionClickListener {
-        fun onSectionClick(section: Int, view: SectionCircleBar)
-    }
 }

@@ -4,7 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.maiboroda.o.sectioncirclebar.ExampleActivity">
 
-
+    <com.maiboroda.o.sectioncirclebar.SectionCircleBar
+        android:id="@+id/wheel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pointerDrawable="@drawable/emotion_pointer"
+        app:previewText="\?"
+        app:previewTextColor="@color/alpha_white"
+        app:previewTextSize="96sp"
+        app:rimColor="@color/alpha_white"
+        app:rimWidth="24dp"
+        app:sectionColor="@color/colorAccent"
+        app:sectionCount="7"
+        app:textColor="@android:color/white"
+        app:textList="@array/emowheel"
+        app:textSize="40sp" />
 </android.support.constraint.ConstraintLayout>

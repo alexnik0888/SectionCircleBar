@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SectionCircleBar</string>
+
+    <string-array name="emowheel">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+    </string-array>
 </resources>
